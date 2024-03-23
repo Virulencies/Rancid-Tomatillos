@@ -4,17 +4,17 @@ import './App.css'
 
 function MovieList({ movies, selectMovie }) {
 
-    const listOfMovies = movies.movies.map(movie => {
+    const listOfMovies = movies.movie.map(movie => {
         return (
             <MovieCard
-            id={movie.id}
-            key={movie.id}
-            poster={movie.poster_path}
-            backdrop={movie.backdrop_path}
-            title={movie.title}
-            rating={movie.average_rating}
-            release={movie.release_date}
-            onSelect={() => selectMovie(movie.id)}
+            id={movies.id}
+            key={movies.id}
+            poster={movies.poster_path}
+            backdrop={movies.backdrop_path}
+            title={movies.title}
+            rating={movies.average_rating}
+            release={movies.release_date}
+            onSelect={() => selectMovie(movies.id)}
             />
         )
     })

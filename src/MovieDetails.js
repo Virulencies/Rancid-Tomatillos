@@ -1,26 +1,28 @@
 import React from 'react'
 
 function MovieDetails({ movie, onBackClick }) {
-
+  
+    console.log('!!movies array', movie)
+    
         return (
             <div className="movie-detail">
                 <button onClick={onBackClick}>Back to Movies</button>
-                <h2>{movie.title}</h2>
-                <p>Average Rating: {movie.average_rating}</p>
-                <img src={movie.backdrop_path} alt={`${movie.title} backdrop`}></img>
-                <p>Release Date: {movie.release_date}</p>
-                <p>Overview: {movie.overview}</p>
-                <p>Genres: {movie.genres}</p>
-                <p>Budget: 630000</p>
-                <p>Revenue: 100853753</p>
-                <p>Runtime: 139</p>
-                <p>Tagline: It's a movie!</p>
-                {/* <MovieDetails movie={selectedMovie} onBackClick={backButton} /> */}
+                <h2>{movie.movie.title}</h2>
+                <p>Average Rating: {movie.movie.average_rating}</p>
+                <img src={movie.movie.backdrop_path} alt={`${movie.movie.title} backdrop`}></img>
+                <p>Release Date: {movie.movie.release_date}</p>
+                <p>Overview: {movie.movie.overview}</p>
+                <p>Genres: {movie.movie.genres}</p>
+                <p>Budget: {movie.movie.budget}</p>
+                <p>Revenue: {movie.movie.revenue}</p>
+                <p>Runtime: {movie.movie.runtime}</p>
+                <p>Tagline: {movie.movie.tagline}</p>
             </div>
         )
 
 }
 
+// toLocaleString("en-us", {style: "currency", currency: "USD"})
 
 export default MovieDetails;
 

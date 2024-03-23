@@ -1,29 +1,38 @@
 import './App.css';
-import movieData from './Data/movieData.js'
+//import movieData from './Data/movieData.js'
 import MovieList from './MovieList.js';
 import MovieDetails from './MovieDetails.js'
+import { fetchAllMoviesData, fetchMovieDetails } from './apiCalls.js';
 import React, { useEffect, useState } from 'react'
 
 function App() {
-  const [movies, setMovies] = useState(movieData);
+  const [movies, setMovies] = useState([]);
   const [selectedMovie, setSelectedMovie] = useState(null)
+  const [error, setError] = useState(null) //maybe not null?
+  const [isLoading, setIsLoading] = useState(false)
+  const backButton = () => setSelectedMovie(null)
+  console.log('35354353534', movies)
 
- const fetchData = () => {
-    fetch('https://rancid-tomatillos.herokuapp.com/api/v2/movies')
-    .then(resp => resp.json())
-    .then(data => setMovies(data))
- }
+  useEffect(() => {
+    setIsLoading(true)
+    fetchAllMoviesData()
+      .then(data => 
+        setMovies(data),
+        // console.log(data),
+        setIsLoading(false)
+      )
+      .catch(error => 
+        setError(error),
+        setIsLoading(false))
+  }, []);
 
- useEffect(() => {
-   fetchData()
- }, [])
- 
   const selectMovie = (movieId) => {
     const movie = movies.movies.find((movie) => movie.id === movieId);
     setSelectedMovie(movie);
+    fetchMovieDetails(movieId)
+      .then(data => setSelectedMovie(data))
+      .catch(error => setError(error))
   }
-
-  const backButton = () => setSelectedMovie(null)
 
   return (
     <main className="App">
@@ -68,6 +77,6 @@ function App() {
   );
 }
 */
-console.log(movieData)
+
 
 export default App;
